@@ -4,7 +4,7 @@ export const searchPlaceFromQuery = async (req, res) => {
     try {
         console.log("Query Recieved : ", req.query);
         
-        const apiKey = process.env.GOOGLE_PLACES_TEXT_API_KEY;
+        const apiKey = process.env.GOOGLE_PLACES_API_KEY;
         const baseURL = process.env.GOOGLE_PLACES_API_BASE_URL;
         const apiURL = `${baseURL}:searchText`;
         
@@ -17,7 +17,7 @@ export const searchPlaceFromQuery = async (req, res) => {
             langugeCode,
             locationBias,
             locationRestriction,
-            maxResultCount,
+            maxResultCount = 10,
             evOptions,
             minRating,
             openNow,
@@ -73,7 +73,7 @@ export const searchPlacesNearby = async (req, res) => {
     try {
         console.log(req.query);
         
-        const apiKey = process.env.GOOGLE_PLACES_NEARBY_API_KEY;
+        const apiKey = process.env.GOOGLE_PLACES_API_KEY;
         const baseURL = process.env.GOOGLE_PLACES_API_BASE_URL;
         const apiURL = `${baseURL}:searchNearby`;
         
@@ -81,8 +81,8 @@ export const searchPlacesNearby = async (req, res) => {
             latitude,
             longitude,
             radius = 5000.0,
-            fields = ['displayName'],
-            includedTypes,
+            fields = ['displayName', 'location', 'businessStatus'],
+            includedTypes = ['restaurant'],
             includedPrimaryTypes,
             excludedTypes,
             excludedPrimaryTypes,
@@ -143,13 +143,13 @@ export const getPlaceDetails = async (req, res) => {
 
         const {
             placeID,
-            fields = ['displayName', 'id'],
+            fields = ['displayName', 'location', 'businessStatus', 'formattedAddress'],
             languageCode,
             regionCode,
             sessionToken,
         } = req.query;
         
-        const apiKey = process.env.GOOGLE_PLACES_DETAILS_API_KEY;
+        const apiKey = process.env.GOOGLE_PLACES_API_KEY;
         const baseURL = process.env.GOOGLE_PLACES_API_BASE_URL;
         const apiURL = `${baseURL}/${placeID}`;
 

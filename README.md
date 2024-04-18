@@ -7,13 +7,13 @@ There are three controllers implemented here, all three directly use the Google 
 
 **Necessary Params** :
 - `queryText` (_Actual text regarding the query, can be the name of the place or a part of it._)
-- `fields` (_List of fields to retrieve regarding the place. **Default : ['displayName', 'location', 'businessStatus']**_)
+- `fields` (_List of fields to retrieve regarding the place. **Default : ['displayName', 'id', 'formattedAddress']**_)
 
 **Optional Params** :
 - `includedType` (_List of types to retrieve regarding the place. **Default : ['restaurant', 'bar', 'cafe']**_)
 - `languageCode` (_Language of the search. **Default : en**_)
 - `locationBias` (_Check the docs for more info._)
-- `locationRestriction` (_Check the docs for more info._)
+- `locationRestriction` (_Check the docs for more info, you typically need to return a location object with longitude and latitude, shape and dimensions.__)
 - `maxResultCount` (_Maximum number of results to retrieve. (Pagination) **Default : 10**_)
 - `evOptions` (_Check the docs for more info._)
 - `minRating` (_Minimum rating of the place. **Default : 0**_)
@@ -82,7 +82,7 @@ curl -X GET -H "Content-Type: application/json" http://localhost:3000/places/que
 - For `searchPlacesNearby`
 
 ```bash
-curl -X GET -H "Content-Type: application/json" http://localhost:3000/places/searchNearby\?latitude\=38.8719\&longitude\=77.0563\&maxResultCount\=2
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/places/searchNearby\?latitude\=38.8719\&longitude\=-77.0563\&maxResultCount\=2
 ```
 
 - For `getPlaceDetails`
